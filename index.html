@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>نتيجة الدفع · تهادوا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #FFF7E6;
+      --bg-card: #FFFFFF;
+      --brand-dark: #2D3A47;
+      --accent: #B46A72;
+      --accent-light: #F7C8D3;
+      --sage: #A8B58A;
+      --sky: #A9B7C6;
+      --text-primary: #2D3A47;
+      --text-secondary: #A9B7C6;
+      --border: #F7C8D3;
+      --r-card: 24px;
+      --r-input: 12px;
+      --r-badge: 20px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      font-size: 15px;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      direction: rtl;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    h1, h2 { font-family: 'Amiri', serif; font-weight: 700; line-height: 1.2; }
+
+    .wrap {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Brand */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .brand .mini-logo { font-family: 'Amiri', serif; font-weight: 700; font-size: 26px; color: var(--text-primary); }
+    .brand .brand-sub { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+
+    /* Status block */
+    .status-icon {
+      width: 96px; height: 96px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 46px; margin-bottom: 24px;
+    }
+    .status-icon.success { background: rgba(168,181,138,.20); color: var(--sage); }
+    .status-icon.error   { background: #F6D6D6; color: #B0474B; }
+    .status-icon.pending { background: rgba(169,183,198,.25); color: var(--sky); }
+
+    .status-title { font-size: 34px; margin-bottom: 10px; }
+    .status-sub { font-size: 16px; color: var(--text-secondary); max-width: 460px; line-height: 1.7; margin-bottom: 28px; }
+
+    /* Spinner */
+    .spinner {
+      width: 56px; height: 56px; border-radius: 50%;
+      border: 4px solid var(--accent-light);
+      border-top-color: var(--accent);
+      animation: tah-spin .9s linear infinite;
+    }
+    @keyframes tah-spin { to { transform: rotate(360deg); } }
+
+    /* Receipt card */
+    .card {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: var(--r-card);
+      padding: 28px;
+      width: 100%;
+      max-width: 440px;
+      text-align: right;
+    }
+    .kv-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 13px 0; border-bottom: 0.5px solid var(--border); font-size: 14px;
+    }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-row .k { color: var(--text-secondary); }
+    .kv-row .v { font-weight: 500; }
+    .kv-row .v.accent { color: var(--accent); font-family: 'Amiri', serif; }
+
+    /* Badges */
+    .badge {
+      display: inline-flex; align-items: center;
+      padding: 5px 13px; border-radius: var(--r-badge);
+      font-size: 12px; font-weight: 500;
+      background: var(--accent-light); color: var(--accent);
+    }
+    .badge.sage   { background: rgba(168,181,138,.22); color: #6f7d4f; }
+    .badge.danger { background: #F6D6D6; color: #B0474B; }
+    .badge.warn   { background: #FBE6C8; color: #B07A2E; }
+
+    /* Buttons */
+    .actions { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 22px; border-radius: var(--r-input);
+      font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 500;
+      border: 0.5px solid transparent; white-space: nowrap;
+      transition: opacity .15s; cursor: pointer; text-decoration: none;
+    }
+    .btn:hover { opacity: .9; }
+    .btn-primary { background: var(--accent); color: var(--bg-primary); }
+    .btn-ghost   { background: transparent; border-color: var(--border); color: var(--text-primary); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="27" r="10" fill="#A9B7C6" opacity="0.35"/>
+        <circle cx="44" cy="24" r="2.4" fill="#2D3A47"/><circle cx="50" cy="22" r="2.4" fill="#2D3A47"/>
+        <circle cx="56" cy="24" r="2.4" fill="#2D3A47"/><circle cx="50" cy="31" r="2.4" fill="#2D3A47"/>
+        <line x1="44" y1="24" x2="56" y2="24" stroke="#2D3A47" stroke-width="1" opacity="0.5"/>
+        <path d="M50 40 L50 47" stroke="#B46A72" stroke-width="2" stroke-linecap="round"/>
+        <path d="M47 45 L50 48 L53 45" stroke="#B46A72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <rect x="27" y="56" width="46" height="28" rx="5" fill="#F7C8D3" opacity="0.9"/>
+        <rect x="23" y="47" width="54" height="12" rx="4" fill="#B46A72"/>
+        <rect x="47" y="47" width="6" height="37" rx="2" fill="#FFF7E6" opacity="0.65"/>
+        <ellipse cx="38" cy="43" rx="9" ry="5" fill="#F7C8D3" transform="rotate(-18 38 43)"/>
+        <ellipse cx="62" cy="43" rx="9" ry="5" fill="#F7C8D3" transform="rotate(18 62 43)"/>
+        <circle cx="50" cy="46" r="4" fill="#B46A72"/>
+      </svg>
+      <div>
+        <div class="mini-logo">تهادوا</div>
+        <div class="brand-sub">هدايا بذكاء</div>
+      </div>
+    </div>
+
+    <!-- Shown while we verify the payment with the backend -->
+    <div class="spinner" id="loadingSpinner"></div>
+    <!-- Result icon (filled in by JS once verification completes) -->
+    <div class="status-icon" id="statusIcon" style="display:none;"></div>
+
+    <h2 class="status-title" id="statusTitle" style="margin-top:24px;">جارٍ تأكيد عملية الدفع…</h2>
+    <p class="status-sub" id="statusSub">يرجى الانتظار بينما نتحقق من حالة الدفع لدى مزود الدفع.</p>
+
+    <div class="card" id="receiptCard" style="display:none;">
+      <div class="kv-row"><span class="k">رقم العملية</span><span class="v" dir="ltr" id="rcptId">—</span></div>
+      <div class="kv-row"><span class="k">المبلغ</span><span class="v accent" id="rcptAmount">—</span></div>
+      <div class="kv-row"><span class="k">طريقة الدفع</span><span class="v" id="rcptProvider">—</span></div>
+      <div class="kv-row"><span class="k">التاريخ</span><span class="v" id="rcptDate">—</span></div>
+      <div class="kv-row"><span class="k">الحالة</span><span class="v"><span class="badge" id="rcptStatus">—</span></span></div>
+    </div>
+
+    <div class="actions" id="actionButtons" style="display:none;">
+      <a class="btn btn-primary" id="primaryBtn" href="#">اذهب للوحة التحكم</a>
+      <a class="btn btn-ghost" id="secondaryBtn" href="#">جرّب خطة المفاجأة</a>
+    </div>
+
+  </div>
+
+  <script>
+  /* ------------------------------------------------------------------
+     Moyasar callback handler (standalone page, e.g. GitHub Pages).
+     Moyasar redirects the browser here after 3-D Secure with:
+        ?id=<paymentId>&status=<paid|failed|...>&message=<text>
+     We never trust that query status directly — we re-verify with the
+     backend, which re-fetches the real status from Moyasar server-side.
+  ------------------------------------------------------------------ */
+  (function () {
+    /* ===== CONFIG: set these to your deployed URLs ===== */
+    var API_BASE = "http://localhost:8080";   // your backend base URL
+    var APP_BASE = "";                          // where your app pages live (leave "" if none)
+    /* =================================================== */
+
+    var params = new URLSearchParams(window.location.search);
+    var paymentId = params.get("id");
+    var urlStatus = (params.get("status") || "").toLowerCase();
+
+    var el = function (id) { return document.getElementById(id); };
+    var spinner = el("loadingSpinner");
+    var icon = el("statusIcon");
+    var title = el("statusTitle");
+    var sub = el("statusSub");
+    var receipt = el("receiptCard");
+    var actions = el("actionButtons");
+    var primaryBtn = el("primaryBtn");
+    var secondaryBtn = el("secondaryBtn");
+
+    function render(state, message) {
+      if (spinner) { spinner.style.display = "none"; }
+      icon.style.display = "flex";
+      actions.style.display = "flex";
+
+      if (state === "success") {
+        icon.className = "status-icon success";
+        icon.textContent = "✓";
+        title.textContent = "تم الدفع بنجاح!";
+        sub.textContent = "تم تفعيل عضويتك المميّزة. كل مزايا تهادوا أصبحت متاحة الآن — خطة المفاجأة، بطاقات الهدية، وأكثر.";
+        primaryBtn.textContent = "اذهب للوحة التحكم";
+        primaryBtn.setAttribute("href", APP_BASE ? APP_BASE + "/dashboard.html" : "#");
+        secondaryBtn.textContent = "جرّب خطة المفاجأة";
+        secondaryBtn.setAttribute("href", APP_BASE ? APP_BASE + "/surprise-plan.html" : "#");
+        secondaryBtn.style.display = "inline-flex";
+      } else if (state === "pending") {
+        icon.className = "status-icon pending";
+        icon.textContent = "⌛";
+        title.textContent = "الدفع قيد المعالجة";
+        sub.textContent = "لم يكتمل تأكيد الدفع بعد. يمكنك تحديث الصفحة بعد لحظات للتحقق من الحالة.";
+        primaryBtn.textContent = "تحديث الحالة";
+        primaryBtn.setAttribute("href", window.location.href);
+        secondaryBtn.style.display = "none";
+      } else {
+        icon.className = "status-icon error";
+        icon.textContent = "✕";
+        title.textContent = "تعذّر إتمام الدفع";
+        sub.textContent = message || "لم تتم عملية الدفع بنجاح. يمكنك المحاولة مرة أخرى.";
+        primaryBtn.textContent = "حاول مرة أخرى";
+        primaryBtn.setAttribute("href", APP_BASE ? APP_BASE + "/premium-upgrade.html" : "#");
+        secondaryBtn.style.display = "none";
+      }
+    }
+
+    function fillReceipt(p) {
+      receipt.style.display = "block";
+      el("rcptId").textContent = p.transactionId || paymentId || "—";
+
+      if (p.amountMinor != null) {
+        var amount = (p.amountMinor / 100).toFixed(2);
+        el("rcptAmount").textContent = amount + " " + (p.currency || "ر.س");
+      }
+
+      el("rcptProvider").textContent = p.provider || "Moyasar";
+
+      if (p.createdAt) {
+        el("rcptDate").textContent = String(p.createdAt).replace("T", " ").slice(0, 16);
+      }
+
+      var eff = (p.moyasarStatus || p.status || "").toLowerCase();
+      var badge = el("rcptStatus");
+      if (eff === "paid") {
+        badge.className = "badge sage";
+        badge.textContent = "مدفوع";
+      } else if (eff === "failed") {
+        badge.className = "badge danger";
+        badge.textContent = "فشل";
+      } else {
+        badge.className = "badge warn";
+        badge.textContent = "قيد المعالجة";
+      }
+    }
+
+    if (!paymentId) {
+      render("error", "رقم العملية غير موجود في الرابط.");
+      return;
+    }
+
+    fetch(API_BASE + "/api/v1/payments/moyasar-status/" + encodeURIComponent(paymentId))
+      .then(function (r) {
+        if (!r.ok) { return r.text().then(function (t) { return Promise.reject(t); }); }
+        return r.json();
+      })
+      .then(function (p) {
+        fillReceipt(p);
+        var eff = (p.moyasarStatus || p.status || urlStatus || "").toLowerCase();
+        if (eff === "paid") {
+          render("success");
+        } else if (eff === "failed") {
+          render("error");
+        } else {
+          render("pending");
+        }
+      })
+      .catch(function () {
+        render("error", "تعذّر التحقق من حالة الدفع. حاول تحديث الصفحة بعد قليل.");
+      });
+  })();
+  </script>
+</body>
+</html>
